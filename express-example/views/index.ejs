@@ -1,0 +1,161 @@
+<html>
+    <head>
+        <title>alipay f2f example page</title>
+        <link rel="stylesheet" href="//lib.baomitu.com/semantic-ui/2.2.6/semantic.min.css">
+        <style>
+            .body {
+                font-family: "Lato,'Helvetica Neue',Arial,Helvetica,sans-serif"
+            }
+
+            .main {
+                max-width: 1000px;
+                margin: 0 auto;
+                margin-top: 72px;
+            }
+
+            .title {
+                padding-bottom: 5px;
+                border-bottom: 1px solid rgba(34,36,38,.15);
+            }
+
+            .top-message {
+                position: fixed;
+                top: 0;
+                right: 0px;
+                width: 100%;
+                height: 60;
+                z-index: 2;
+                background: #fff;
+                border-bottom: 1px solid rgba(34,36,38,.15);
+                transform: translateY(-61px);
+                transition: all 0.25s cubic-bezier(0.42, 0, 0, 1.8);
+            }
+
+            .top-message > div {
+                max-width: 1000px;
+                margin: 25 auto;
+            }
+
+            .top-message-display {
+                transform: translateY(-11px);
+                box-shadow: 0 1px 12px 0px #444444;
+            }
+
+            .qrcode {
+                width: 150px;
+                height: 150px;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div class="top-message">
+            <div>
+                <img width="25" height="25"
+                     src="data:image/png;base64,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">
+                <span style="font-size: 19;position: relative;top: -6px;left: 5px;"></span>
+            </div>
+        </div>
+
+   
+
+
+
+        <div class="main">
+            <h2 class="title">支付宝F2F支付测试页面</h2>
+
+            <div class="ui green message" style="display:none"><p></p></div>
+
+
+            <div class="ui action input">
+                <div id="createInvoiceLoading"
+                     class="ui active inverted dimmer"
+                     style="border-radius: 0.28571429rem;display: none">
+                    <div class="ui loader"></div>
+                </div>
+                <input type="text" id="invoiceAmount" value="" placeholder="请输入金额">
+                <button class="ui teal right icon button" id="createInvoiceButton"> 生成支付二维码</button>
+            </div>
+
+            <img class="qrcode" style="display: none" src="">
+        </div>
+
+        <script src="//lib.baomitu.com/zepto/1.2.0/zepto.min.js"></script>
+        <script>
+            $('#createInvoiceButton').on("click", function () {
+
+                displayMessageBar(false);
+
+            	if($('#invoiceAmount').val() == "") {
+		            displayMessage("请填写测试金额.");
+		            return;
+                }
+            	$('#createInvoiceLoading').css("display", "");
+               
+
+                /* 请求创建订单 建议加上验证码 */
+                $.post('/createInvoice', { 
+                    amount: $('#invoiceAmount').val()
+                }, function(result){
+
+	                $('#createInvoiceLoading').css("display", "none");
+
+                    if(result.status == false) {
+                        displayMessage(result.message);
+                        return;
+                    }
+
+                    /* 将输入金额框隐藏 来显示二维码 */
+                    $("div.ui.action.input").css("display", "none");
+
+                    $("img.qrcode").attr("src", "/createQRCode?text=" +
+                                                encodeURIComponent(result.message.qrCode) + "&_=" + new Date().getTime());
+	                $("img.qrcode").css("display", "");
+
+
+	                /* 开始轮询订单是否成功支付 实际使用中建议使用WebSocket */
+                    var intervalId = setInterval(function () {
+	                    checkInvoiceStatus(result.message.noInvoice, intervalId);
+                    }.bind(this), 2000)
+
+
+                });
+            });
+
+            var checking = false;
+            function checkInvoiceStatus(noInvoice, intervalId) {
+                if(checking) {
+                	return;
+                }
+	            checking = true;
+	            $.post('/checkInvoice', { noInvoice: noInvoice }, function(result){
+                    if(result.status === true && result.message === true) {
+                        displayMessageBar(true,  "您成功支付了订单!")
+                        $("div.ui.action.input").css("display", "");
+                        $("img.qrcode").css("display", "none");
+                        $('#invoiceAmount').val("");
+                        clearInterval(intervalId);
+                    }
+
+		            checking = false;
+	            });
+            }
+
+            function displayMessageBar(display, message) {
+                if(message != undefined) {
+                    $('div.ui.green.message > p').html(message);
+                }
+                $('div.ui.green.message').css("display", display ? "" : "none")
+            }
+
+            function displayMessage(message) {
+	            $('div.top-message > div > span').html(message);
+                $('div.top-message').addClass("top-message-display");
+                setTimeout(function () {
+	                $('div.top-message').removeClass("top-message-display");
+                }, 1800);
+            }
+        </script>
+    </body>
+</html>
