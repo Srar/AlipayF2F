@@ -14,5 +14,8 @@ module.exports = {
 	"\n-----END RSA PRIVATE KEY-----",
 
 	/* 支付宝公钥 如果为空会使用默认值 */
-	//"alipayPublicKey": ""
+	// "alipayPublicKey": "",
+	
+	/* 支付宝支付网关 如果为空会使用沙盒网关 */
+	// "gatewayUrl": "https://openapi.alipay.com/gateway.do",
 };
