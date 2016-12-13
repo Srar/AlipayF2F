@@ -53,9 +53,12 @@ router.post("/createInvoice", (req, res) => {
 router.post("/callback", (req, res) => {
 	req.alipayf2f.verifyCallback(req.body).then(result => {
 		var noInvoice = req.body["out_trade_no"];
+		var invoiceStatus = req.body["trade_status"];
+		if(invoiceStatus !== "TRADE_SUCCESS") {
+			throw "仅支持TRADE_SUCCESS类型回调";
+		}
 		return req.database.update(noInvoice, { pay: true });
 	}).then(result => res.send(result)).catch(err => res.catch(err));
-	//console.log(req.body);
 });
 
 
