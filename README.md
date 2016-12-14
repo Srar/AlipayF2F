@@ -50,7 +50,7 @@ module.exports = {
 下面`new`一个`alipay_f2f`对象并将刚刚的`config.js`传入
 
 ```javascript
-var alipayf2f = new alipayf2f(require("./config.js"));
+var alipay_f2f = new alipayf2f(require("./config.js"));
 ```
 
 然后就能使用`createQRPay`肛出一个二维码来让用户扫了
@@ -90,7 +90,7 @@ __用户扫码并支付__
 ```javascript
 router.post("/callback", (req, res) => {
 	/* 请勿改动支付宝回调过来的post参数, 否则会导致延签失败 */
-	var signStatus = alipayf2f.verifyCallback(req.body);
+	var signStatus = alipay_f2f.verifyCallback(req.body);
 	if(signStatus === false) {
 		return res.error("回调签名验证未通过");
 	}
@@ -118,7 +118,7 @@ __服务器网络暴毙? 没收到支付宝回调?__
 这个方法呢可以给你手动查询订单状态. 使用起来也很方便, 只需要传入一个`商户订单号`就行了:
 
 ```javascript
-alipayf2f.checkInvoiceStatus("2333333").then(result => {
+alipay_f2f.checkInvoiceStatus("2333333").then(result => {
   /* 返回的result就是订单信息 */
   console.log(result);
 }).catch(error => { });
