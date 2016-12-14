@@ -16,7 +16,7 @@
 ## 屁话多!如何使用?
 您先需要准备一个Object对象内部存放alipay的配置如下:
 
-__预创建订单__
+
 
 ```javascript
 // config.js
@@ -39,15 +39,17 @@ module.exports = {
 	/* 应用RSA私钥 请勿忘记 ----BEGIN RSA PRIVATE KEY----- 与 -----END RSA PRIVATE KEY-----  */
 	"merchantPrivateKey": "",
 
-	/* 支付宝公钥 如果为空会使用默认值 请勿忘记 -----BEGIN PUBLIC KEY----- 与 -----END PUBLIC KEY----- */
+	/* 支付宝公钥 如果为注释掉会使用沙盒公钥 请勿忘记 -----BEGIN PUBLIC KEY----- 与 -----END PUBLIC KEY----- */
 	"alipayPublicKey": "",
 	
-	/* 支付宝支付网关 如果为空会使用沙盒网关 */
+	/* 支付宝支付网关 如果为注释掉会使用沙盒网关 */
 	"gatewayUrl": "",
 };
 ```
 
-下面`new`一个`alipay_f2f`对象并将刚刚的`config.js`传入
+__预创建订单__
+
+`new`一个`alipayf2f`对象并将刚刚的`config.js`传入
 
 ```javascript
 var alipay_f2f = new alipayf2f(require("./config.js"));
@@ -67,7 +69,7 @@ alipay_f2f.createQRPay({
 }).catch(error => console.error(error));
 ```
 
-如果一切都是理想情况, 支付宝应该会返回code为10000的一段这样JSON:
+如果一切都是理想情况, 支付宝应该会返回`code`为`10000`的一段这样JSON:
 
 ```json
 {
@@ -85,7 +87,7 @@ __用户扫码并支付__
 
 你要想确认这个回调请求是不是支付宝的该如何判断? 不要慌有个方法叫`verifyCallback`就能帮您鉴别是不是支付宝发送的了!
 
-假设我们现在使用的是express, 并且`notifyUrl`为`http://example.com/callback`
+假设我们现在使用的是[express](http://expressjs.com/), 并且`notifyUrl`为`http://example.com/callback`
 
 ```javascript
 router.post("/callback", (req, res) => {
