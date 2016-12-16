@@ -12,7 +12,7 @@ router.post("/createInvoice", (req, res) => {
 		return res.error("请填写测试金额.");
 	}
 	amount = parseFloat(amount);
-	if(isNaN(amount)) {
+	if(isNaN(amount) || amount <= 0) {
 		return res.error("测试金额输入错误.");
 	}
 	/* 支付宝支持2位小数的金额 */
