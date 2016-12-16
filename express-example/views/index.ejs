@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>alipay f2f example page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no" />
         <link rel="stylesheet" href="//lib.baomitu.com/semantic-ui/2.2.6/semantic.min.css">
         <style>
             .body {
@@ -9,8 +10,7 @@
 
             .main {
                 max-width: 1000px;
-                margin: 0 auto;
-                margin-top: 72px;
+                margin: 72px auto;
             }
 
             .title {
@@ -44,6 +44,18 @@
             .qrcode {
                 width: 150px;
                 height: 150px;
+            }
+
+            @media screen and (max-width: 500px) {
+                .main {
+                    max-width: 1000px;
+                    margin: 72px 15px;
+                    text-align: center;
+                }
+
+                .top-message > div {
+                    padding-left: 15px;
+                }
             }
         </style>
     </head>
