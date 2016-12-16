@@ -91,7 +91,7 @@ __用户扫码并支付__
 
 ```javascript
 router.post("/callback", (req, res) => {
-	/* 请勿改动支付宝回调过来的post参数, 否则会导致延签失败 */
+	/* 请勿改动支付宝回调过来的post参数, 否则会导致验签失败 */
 	var signStatus = alipay_f2f.verifyCallback(req.body);
 	if(signStatus === false) {
 		return res.error("回调签名验证未通过");
@@ -123,9 +123,35 @@ __服务器网络暴毙? 没收到支付宝回调?__
 
 ```javascript
 alipay_f2f.checkInvoiceStatus("2333333").then(result => {
-  /* 返回的result就是订单信息 */
   console.log(result);
 }).catch(error => { });
+```
+
+输出
+
+```json
+{
+    "code":"10000",
+    "msg":"Success",
+    "buyer_logon_id":"494***@qq.com",
+    "buyer_pay_amount":"0.01",
+    "buyer_user_id":"0000702210000000",
+    "fund_bill_list":[
+        {
+            "amount":"0.01",
+            "fund_channel":"ALIPAYACCOUNT"
+        }
+    ],
+    "invoice_amount":"0.01",
+    "open_id":"00001023939817879028820892810000",
+    "out_trade_no":"alipayf2f_1481800000000",
+    "point_amount":"0.00",
+    "receipt_amount":"0.01",
+    "send_pay_date":"2016-12-16 00:00:00",
+    "total_amount":"0.01",
+    "trade_no":"2016121621001000000000000000",
+    "trade_status":"TRADE_SUCCESS"
+}
 ```
   
 # 直接看看效果?
