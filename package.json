@@ -1,5 +1,5 @@
 {
-  "name": "alipay-f2f",
+  "name": "alipay-ftof",
   "version": "0.0.0",
   "description": "支付宝当面付nodejs apis",
   "main": "index.js",

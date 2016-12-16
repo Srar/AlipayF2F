@@ -2,7 +2,17 @@
 支付宝当面付NodeJS API.
 
 # 如何使用
-偷懒起见我就不提交到npm了, 如果您需要使用直接clone本项目即可.
+
+~~偷懒起见我就不提交到npm了, 如果您需要使用直接clone本项目即可.~~
+
+今天打算提交到npm然后发现`alipay-f2f`这个名已经被占了, 所以使用`alipay-ftof`作为名字来发布.
+
+安装方式:
+
+```
+npm install alipay-ftof
+```
+
 
 `express-example`为express的example项目, 您可以在config.js内修改好您的当面付配置信息后直接使用.
 
