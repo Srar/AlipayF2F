@@ -5,6 +5,8 @@ logs
 *.log
 npm-debug.log*
 
+alipayf2f_*
+
 # Runtime data
 pids
 *.pid
