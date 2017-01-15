@@ -1,6 +1,6 @@
 {
   "name": "alipay-ftof",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "支付宝当面付nodejs apis",
   "main": "index.js",
   "scripts": {
