@@ -18,5 +18,9 @@
   "homepage": "https://github.com/Srar/AlipayF2F#readme",
   "dependencies": {
     "request": "^2.79.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0",
+    "should": "^11.2.0"
   }
 }
