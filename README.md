@@ -21,12 +21,11 @@ npm install alipay-ftof
 * `createQRPay`: 预创建二维码支付宝订单, 当扫码后才是真创建订单.
 * `verifyCallback`: 支付宝回调验签.
 * `checkInvoiceStatus`: 查询订单状况.
+* `refund`: 订单退款.([guanbo](https://github.com/guanbo))
 
 
 ## 屁话多!如何使用?
 您先需要准备一个Object对象内部存放alipay的配置如下:
-
-
 
 ```javascript
 // config.js
@@ -42,11 +41,11 @@ module.exports = {
 	"notifyUrl": "",
 
 	/* 公钥 和 私钥 的填写方式 */
-	"testPrivateKey": "----BEGIN RSA PRIVATE KEY-----\n" +
+	"testPrivateKey": "-----BEGIN RSA PRIVATE KEY-----\n" +
 		          "公钥或私钥内容..." +
 		          "\n-----END RSA PRIVATE KEY-----",
 
-	/* 应用RSA私钥 请勿忘记 ----BEGIN RSA PRIVATE KEY----- 与 -----END RSA PRIVATE KEY-----  */
+	/* 应用RSA私钥 请勿忘记 -----BEGIN RSA PRIVATE KEY----- 与 -----END RSA PRIVATE KEY-----  */
 	"merchantPrivateKey": "",
 
 	/* 支付宝公钥 如果为注释掉会使用沙盒公钥 请勿忘记 -----BEGIN PUBLIC KEY----- 与 -----END PUBLIC KEY----- */
@@ -56,6 +55,8 @@ module.exports = {
 	"gatewayUrl": "",
 };
 ```
+
+> 注意！您需要生成RSA2公钥与私钥来配合本项目使用.
 
 __预创建订单__
 
