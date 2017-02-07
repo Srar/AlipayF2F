@@ -1,9 +1,6 @@
-var AlipayF2F = require("../..");
+const AlipayF2F = require("../..");
 
-module.exports = {};
-
-before(function(){
-  module.exports.alipay_f2f = new AlipayF2F({
+const config = {
       appid: 2016073100134952,
       notifyUrl: "http://www.qq.com",
       merchantPrivateKey: `-----BEGIN RSA PRIVATE KEY-----
@@ -11,5 +8,10 @@ MIIEpAIBAAKCAQEAq6W/oQxPlEIIL/dPNqiRXRpe8oTi8FRqCMlROWg/rxfZDY7ruVk2qn7k/p1VeH2Y
 -----END RSA PRIVATE KEY-----`,
       alipayPublicKey:"-----BEGIN PUBLIC KEY-----\n" + 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzkurPEiaMNwMxbOQ97sWp0l4JhFZVfolc946N8ZylCjjETau8SjE+T9t21p+SACdUjrmUTmOVfCkAp0qpD+EdY9jb3k0A4ibeUts+ZyK1us4NLp/5WsOqArQu3//iOcoEKf4lgUWf3WCGQZZ5DpTpaLOgXg8wAXbzIb4NKtJMdPqiLupRYBVBXzYmXwFepqgs3bRcHk/iuYPXjccV8CyXjq4PsQPNCLq9ToSnWty7CLUk5J1Ago2ZpZrPk2JeuTZoCGrSgUI62eCZnB0/JA4j3rvI98ONm+lAl6FN/kV4S5anewQnG6TJ6sX7Re8eqFR5uZVg+t86gtzIV2ygZTKvQIDAQAB'+
       "\n-----END PUBLIC KEY-----"
-  });
+};
+
+module.exports = {};
+
+before(function(){
+  module.exports.alipay_f2f = new AlipayF2F(config);
 })

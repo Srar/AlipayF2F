@@ -21,7 +21,8 @@ npm install alipay-ftof
 * `createQRPay`: 预创建二维码支付宝订单, 当扫码后才是真创建订单.
 * `verifyCallback`: 支付宝回调验签.
 * `checkInvoiceStatus`: 查询订单状况.
-* `refund`: 订单退款.([guanbo](https://github.com/guanbo))
+* `createRefund`: 订单退款.([guanbo](https://github.com/guanbo))
+* `openAuthTokenApp`: ISV授权。
 
 
 ## 屁话多!如何使用?
@@ -184,21 +185,54 @@ app.alipay_f2f.refund(refund).then(result => {
 
 ```json
 {
-  code: '10000',
-  msg: 'Success',
-  buyer_logon_id: 'hya***@sandbox.com',
-  buyer_user_id: '2088102170322284',
-  fund_change: 'Y',
-  gmt_refund_pay: '2017-02-06 17:46:34',
-  open_id: '20881013820906275677621172812028',
-  out_trade_no: '1486372683551',
-  refund_detail_item_list: [{
-    amount: '100.00',
-    fund_channel: 'ALIPAYACCOUNT'
+  "code": "10000",
+  "msg": "Success",
+  "buyer_logon_id": "hya***@sandbox.com",
+  "buyer_user_id": "2088102170322284",
+  "fund_change": "Y",
+  "gmt_refund_pay": "2017-02-06 17:46:34",
+  "open_id": "20881013820906275677621172812028",
+  "out_trade_no": "1486372683551",
+  "refund_detail_item_list": [{
+    "amount": "100.00",
+    "fund_channel": "ALIPAYACCOUNT"
   }],
-  refund_fee: '100.00',
-  send_back_fee: '100.00',
-  trade_no: '2017020621001004280200150698'
+  "refund_fee": "100.00",
+  "send_back_fee": "100.00",
+  "trade_no": "2017020621001004280200150698"
+}
+```
+
+__授权__
+
+```js
+const bizContent = {
+  grant_type: 'authorization_code',
+  code: query.app_auth_code
+};
+app.alipay_f2f.openAuthTokenApp(bizContent).then(result => {
+  result.should.have.property('app_auth_token');
+  result.should.have.property('app_refresh_token');
+  token = result;
+  done();
+}, done)
+```
+
+响应
+
+```json
+{
+    "alipay_open_auth_token_app_response": {
+        "code": "10000",
+        "msg": "Success",
+        "app_auth_token": "201510BBb507dc9f5efe41a0b98ae22f01519X62",
+        "app_refresh_token": "201510BB0c409dd5758b4d939d4008a525463X62",
+        "auth_app_id": "2013111800001989",
+        "expires_in": 31536000,
+        "re_expires_in": 32140800,
+        "user_id": "2088011177545623"
+    },
+    "sign": "TR5xJkWX65vRjwnNNic5n228DFuXGFOCW4isWxx5iLN8EuHoU2OTOeh1SOzRredhnJ6G9eOXFMxHWl7066KQqtyxVq2PvW9jm94QOuvx3TZu7yFcEhiGvAuDSZXcZ0sw4TyQU9+/cvo0JKt4m1M91/Quq+QLOf+NSwJWaiJFZ9k="
 }
 ```
 
@@ -208,6 +242,7 @@ app.alipay_f2f.refund(refund).then(result => {
 make test
 ```  
 
+## 退款测试
 支付环节需要人工介入，退款的测试需要调整下面的
 `./test/test-f2f.js`
 
@@ -231,6 +266,11 @@ describe.skip('Refund', function(){
 - `QRPay` => `describe.skip('QRPay', function(){`
 - `Refund` => `describe.only('Refund', function(){`
 - `make test`
+
+## ISV授权
+* 参考`test/test-auth.js`将拼装的url二维码。
+* `mocha test/test-auth.js`
+* 沙盒支付宝扫码授权。
 
 # 直接看看效果?
 [点这里](https://alipayf2f.x-speed.cc) 然后我也不介意您给我5毛的(:

@@ -1,12 +1,12 @@
-var app = require('./fixtures/app');
+const app = require('./fixtures/app');
 
-var payment = {
+const payment = {
   tradeNo: '1486372683551',
   subject: "女装",
   totalAmount: 100
 }
 
-describe.only('QRPay', function(){
+describe('QRPay', function(){
   
   it('should ok', function(done){
     app.alipay_f2f.createQRPay(payment).then(result => {
@@ -25,13 +25,12 @@ describe.skip('Refund', function(){
   this.timeout(10000);
   
   it('should ok', function(done){
-    var refund = {
+    const refund = {
       tradeNo: payment.tradeNo,
       refundNo: Date.now(),
       refundAmount: payment.totalAmount
     }
     app.alipay_f2f.refund(refund).then(result => {
-      console.log(result);
       result.should.have.property('code', '10000');
       result.should.have.property('refund_fee');
       done();
