@@ -4,7 +4,7 @@ const app = require('./fixtures/app');
 const http = require('http');
 const url = require('url');
 
-describe.only('Token', function(){
+describe.skip('Token', function(){
   this.timeout(100000);
   let token, query;
   
@@ -37,9 +37,19 @@ describe.only('Token', function(){
       refresh_token: token.app_refresh_token
     }
     app.alipay_f2f.openAuthTokenApp(bizContent).then(result => {
+      console.log(result);
       result.should.have.property('app_auth_token');
       result.should.have.property('app_refresh_token');
       done();
     }, done)
   })
 })
+
+// { code: '10000',
+//   msg: 'Success',
+//   app_auth_token: '201702BB8bc9d194e74248e986444856bae13X20',
+//   app_refresh_token: '201702BB02410f54992141e190b390fea7ec0X20',
+//   auth_app_id: '2016073100134952',
+//   expires_in: 31536000,
+//   re_expires_in: 32140800,
+//   user_id: '2088102169331202' }
