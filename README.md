@@ -174,7 +174,7 @@ var refund = {
   refundNo: Date.now(),
   refundAmount: payment.totalAmount
 }
-app.alipay_f2f.refund(refund).then(result => {
+app.alipay_f2f.createRefund(refund).then(result => {
   result.should.have.property('code', '10000');
   result.should.have.property('refund_fee');
 });
