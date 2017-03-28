@@ -182,7 +182,7 @@ app.alipay_f2f.refund(refund).then(result => {
 
 响应  
 
-```json
+```js
 {
   code: '10000',
   msg: 'Success',
