@@ -42,3 +42,4 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
+express-example/config.js

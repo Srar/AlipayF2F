@@ -14,15 +14,16 @@ npm install alipay-ftof
 ```
 
 
-`express-example`为express的example项目, 您可以在config.js内修改好您的当面付配置信息后直接使用.
+`express-example`为express的example项目, 您可以将`config.js.tpl`复制为`config.js`然后修改好您的当面付配置信息后直接使用.
 
 # 5分钟快速了解
 ## 目前已实现的功能
 * `createQRPay`: 预创建二维码支付宝订单, 当扫码后才是真创建订单.
 * `verifyCallback`: 支付宝回调验签.
-* `checkInvoiceStatus`: 查询订单状况.
-* `refund`: 订单退款.([guanbo](https://github.com/guanbo))
-
+* `checkInvoiceStatus`: 使用商户订单号查询订单状况.
+* `checkInvoiceStatusWithAlipayTradeNo`: 使用使用支付宝订单号查询订单状况.
+* `refund`: 使用商户订单号请求退款操作.([guanbo](https://github.com/guanbo))
+* `refundWithAlipayTradeNo`: 使用支付宝订单号请求退款操作.([guanbo](https://github.com/guanbo))
 
 ## 屁话多!如何使用?
 您先需要准备一个Object对象内部存放alipay的配置如下:
@@ -165,20 +166,19 @@ alipay_f2f.checkInvoiceStatus("2333333").then(result => {
 }
 ```
 
-__退款__
+__使用商户订单号请求退款__
 
 ```javascript
 var refund = {
-  tradeNo: payment.tradeNo,
+  /* 退款编号 可选 用于分批退款 */
   refundNo: Date.now(),
+  /* 退款金额 如果refundNo为空 refundAmount必须为订单全款 */
   refundAmount: payment.totalAmount
 }
-app.alipay_f2f.refund(refund).then(result => {
+app.alipay_f2f.refund("123456", refund).then(result => {
   result.should.have.property('code', '10000');
-  result.should.have.property('refund_fee');
 });
 ```
-- `refundNo` 部分退款时必传。
 
 响应  
 
@@ -207,30 +207,8 @@ app.alipay_f2f.refund(refund).then(result => {
 ```bash
 make test
 ```  
+测试需要您设置完毕`express-example/config.js`文件. 测试过程中需要人工介入来 __生成二维码__ .
 
-支付环节需要人工介入，退款的测试需要调整下面的
-`./test/test-f2f.js`
-
-```javascript
-var payment = {
-  tradeNo: '1486372683551',
-  subject: "女装",
-  totalAmount: 100
-}
-
-describe.only('QRPay', function(){
-....
-
-describe.skip('Refund', function(){
-...
-
-```
-- 设定tradeNo，每次不能重复。
-- `make test`
-- 沙盒支付宝App扫码支付。
-- `QRPay` => `describe.skip('QRPay', function(){`
-- `Refund` => `describe.only('Refund', function(){`
-- `make test`
 
 # 直接看看效果?
 [点这里](https://alipayf2f.x-speed.cc) 然后我也不介意您给我5毛的(:
