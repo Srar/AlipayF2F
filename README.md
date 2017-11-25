@@ -166,6 +166,42 @@ alipay_f2f.checkInvoiceStatus("2333333").then(result => {
 }
 ```
 
+__使用用户付款码付款__
+```javascript
+var payment = {
+    // 商户订单号
+    tradeNo: Date.now().toString() + Math.floor(Math.random() * 9999) + 1,
+    // 订单标题
+    subject: "女装",
+    // 订单总金额
+    totalAmount: 100,
+    // 支付授权码，25~30开头的长度为16~24位的数字，实际字符串长度以开发者获取的付款码长度为准
+    authCode: ""
+}
+```
+
+响应
+
+```js
+{ 
+    code: '10000',
+    msg: 'Success',
+    buyer_logon_id: 'yqu***@sandbox.com',
+    buyer_pay_amount: '100.00',
+    buyer_user_id: '2088102168717885',
+    buyer_user_type: 'PRIVATE',
+    fund_bill_list: [ { amount: '100.00', fund_channel: 'ALIPAYACCOUNT' } ],
+    gmt_payment: '2017-11-25 14:32:10',
+    invoice_amount: '100.00',
+    open_id: '20880033278643371074141272412388',
+    out_trade_no: '151159149052644861',
+    point_amount: '0.00',
+    receipt_amount: '100.00',
+    total_amount: '100.00',
+    trade_no: '2017112521001004880200394043' 
+}
+```
+
 __使用商户订单号请求退款__
 
 ```javascript
